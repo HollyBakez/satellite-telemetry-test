@@ -11,3 +11,6 @@ def get_db():
     finally:
         # If using SQLite or actual DB we'd close the connection here.
         pass
+
+def reset_db():
+    _TELEMETRY_DB.clear()
