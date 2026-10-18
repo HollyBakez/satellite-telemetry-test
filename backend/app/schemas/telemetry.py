@@ -3,10 +3,12 @@ from enum import Enum
 from pydantic import BaseModel, Field
 
 """
- Defines Telemetry model and handles validation for:
+ Defines Telemetry Creation schema and handles its validation for:
   - valid ISO 8601 datetime 
   - altitude must be greater than 0, positive number
   - velocity must be greater than 0, positive number
+  - status is typed as enum strings, predefined as healthy, warning, and critical based on the assumption of 
+    keeping things simple since the status values were not strictly defined in requirements.
 """
 
 class TelemetryCreate(BaseModel):
