@@ -26,6 +26,9 @@ class TelemetryRead(BaseModel):
     velocity: float
     status: TelemetryStatus
 
+"""
+Status is assumed to be an enum string, to make it easier to filter by, easily extendable for other status enums.
+"""
 class TelemetryStatus(str, Enum):
     HEALTHY = "healthy"
     WARNING = "warning"

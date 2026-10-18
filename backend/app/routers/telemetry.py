@@ -40,6 +40,8 @@ async def get_all_telemetry_data(limit: str= Query(default='10'), offset: int = 
 
 @router.post("", response_model=TelemetryRead)
 async def create_telementry_entry(payload: TelemetryCreate, repo: TelemetryRepository = Depends(get_telemetry_repo)):
+    # dump the payload and create a telemetry entry object to auto assign it a uuid
+    # then add it to the database.
     telemetry = Telemetry(**payload.model_dump())
     return await repo.create(telemetry)
 
