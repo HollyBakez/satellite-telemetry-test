@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Paper, Stack, TextField, Typography } from "@mui/material";
+import { Button, Stack, TextField, Typography } from "@mui/material";
 import type { TelemetryCreate } from "../types/telemetry";
 
 interface TelemetryFormProps {
