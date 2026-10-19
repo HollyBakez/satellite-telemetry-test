@@ -2,7 +2,7 @@
 from fastapi import APIRouter, Depends, HTTPException, Query
 from app.database.db import get_db
 from app.models.telemetry import Telemetry
-from app.schemas.telemetry import TelemetryCreate, TelemetryRead, TelemetryStatus
+from app.schemas.telemetry import TelemetryCreate, TelemetryRead
 from app.repository.telemetry_repository import TelemetryRepository
 from app.services.telemetry import filter_telemetry
 
@@ -13,7 +13,7 @@ def get_telemetry_repo(db: list[Telemetry] = Depends(get_db)) -> TelemetryReposi
     return TelemetryRepository(db)
 
 @router.get("", response_model= list[Telemetry])
-async def get_all_telemetry_data(limit: str= Query(default='10'), offset: int = Query(default=0, ge=0), satelliteId: str | None = Query(default=None, min_length=1), status: TelemetryStatus | None = Query(default=None), repo: TelemetryRepository = Depends(get_telemetry_repo)):
+async def get_all_telemetry_data(limit: str= Query(default='10'), offset: int = Query(default=0, ge=0), satelliteId: str | None = Query(default=None, min_length=1), status: str | None = Query(default=None), repo: TelemetryRepository = Depends(get_telemetry_repo)):
     """
     Returns a set amount of telemetry entries from the database. The telemetry entries are filtered by satelliteId and status if either are provided.
     The filtered results are then paginated into a set amount based on the limit and offset.
