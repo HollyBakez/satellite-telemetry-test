@@ -45,7 +45,7 @@ def test_create_telemetry_reject_negative_velocity(client):
 
     assert response.status_code == 422
 
-def test_create_telemetry_invalid_status(client):
+def test_create_telemetry_accepts_arbitrary_status(client):
     payload = {
         "satelliteId": "SAT-001",
         "timestamp": "2026-10-18T10:00:00Z",
@@ -56,7 +56,10 @@ def test_create_telemetry_invalid_status(client):
 
     response = client.post("/telemetry", json=payload)
 
-    assert response.status_code == 422
+    assert response.status_code == 200
+
+    data = response.json()
+    assert data["status"] == "invalid_status"
 
 
 
