@@ -45,7 +45,8 @@ I also implemented all the bonus features for both frontend and backend tasks.
 ## Prerequisites
 
 - Python 3.15
-- Node.js and npm
+- Node.js 22 LTS
+- npm 10+
 
 ## How to run Backend
 
