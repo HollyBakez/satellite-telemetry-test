@@ -121,6 +121,7 @@ export default function TelemetryForm({
 
       <Stack component="form" onSubmit={handleSubmit} spacing={2}>
         <TextField
+          id="telemetry-satellite-id"
           label="Satellite ID"
           value={form.satelliteId}
           onChange={(e) => handleChange("satelliteId", e.target.value)}
@@ -131,6 +132,7 @@ export default function TelemetryForm({
         />
 
         <TextField
+          id="telemetry-timestamp"
           label="Timestamp"
           type="datetime-local"
           value={form.timestamp}
@@ -146,11 +148,12 @@ export default function TelemetryForm({
         />
 
         <TextField
+          id="telemetry-altitude"
           label="Altitude"
           type="number"
           value={form.altitude}
           onChange={(e) => handleChange("altitude", e.target.value)}
-          slotProps={{ htmlInput: { min: 0, step: "any" } }}
+          slotProps={{ htmlInput: { step: "any" } }}
           error={!!formErrors.altitude}
           helperText={
             formErrors.altitude ?? "Altitude must be a number greater than 0."
@@ -160,11 +163,12 @@ export default function TelemetryForm({
         />
 
         <TextField
+          id="telemetry-velocity"
           label="Velocity"
           type="number"
           value={form.velocity}
           onChange={(e) => handleChange("velocity", e.target.value)}
-          slotProps={{ htmlInput: { min: 0, step: "any" } }}
+          slotProps={{ htmlInput: { step: "any" } }}
           error={!!formErrors.velocity}
           helperText={
             formErrors.velocity ?? "Velocity must be a number greater than 0."
@@ -174,6 +178,7 @@ export default function TelemetryForm({
         />
 
         <TextField
+          id="telemetry-status"
           label="Status"
           value={form.status}
           onChange={(e) => handleChange("status", e.target.value)}
