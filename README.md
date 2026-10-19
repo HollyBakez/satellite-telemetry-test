@@ -81,6 +81,13 @@ docker build -t telemetry-backend .
 docker run --rm -d --name telemetry-backend -p 8000:8000 telemetry-backend
 ```
 
+#### How to stop Docker container
+
+```bash
+# To stop backend container
+docker stop telemetry-backend
+```
+
 The backend API will be available at http://localhost:8000, with interactive API documentation at http://localhost:8000/docs.
 
 ### How to run backend tests
