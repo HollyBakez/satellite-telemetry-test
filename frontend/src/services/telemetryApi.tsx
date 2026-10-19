@@ -1,5 +1,6 @@
 const BASE_URL = "http://localhost";
-const PORT = "5173";
+const PORT = "8000";
+
 export const getAllTelemetryData = async () => {
   const response = await fetch(`${BASE_URL}:${PORT}/telemetry`);
 
@@ -11,4 +12,16 @@ export const getAllTelemetryData = async () => {
   }
 
   return response.json();
+};
+
+export const getTelemetryAPIHealthCheck = async () => {
+  try {
+    const response = await fetch(`${BASE_URL}:${PORT}/`);
+    if (!response.ok) {
+      return false;
+    }
+    return true;
+  } catch {
+    return false;
+  }
 };
