@@ -13,7 +13,7 @@ export const getAllTelemetryData = async (): Promise<Telemetry[]> => {
   if (!response.ok) {
     const errorText = await response.text();
     throw new Error(
-      `GET Error ${response.status}: ${errorText || response.text}`,
+      `GET Error ${response.status}: ${errorText || response.statusText}`,
     );
   }
 
