@@ -17,6 +17,7 @@ import {
 } from "./services/telemetryApi";
 import TelemetryForm from "./components/TelemetryForm/TelemetryForm";
 import type { Telemetry, TelemetryCreate } from "./types/telemetry";
+import SatelliteAltIcon from "@mui/icons-material/SatelliteAlt";
 
 function App() {
   const [rows, setRows] = useState<Telemetry[]>([]);
@@ -96,6 +97,7 @@ function App() {
     void fetchTelemetry();
   }, [fetchTelemetry]);
 
+  // On component mount, check backend server health connection
   useEffect(() => {
     void checkHealth();
 
@@ -107,49 +109,71 @@ function App() {
   }, [checkHealth]);
 
   return (
-    <Container maxWidth="lg" sx={{ py: 4 }}>
-      <Typography variant="h4" component="h1" gutterBottom>
-        🚀 Satellite Telemetry Dashboard
-      </Typography>
-      {/* Implement delete button to table */}
-      <Typography color="text.secondary">
-        Monitor and manage telemetry data.
-      </Typography>
-      <Typography>
-        Backend API Health Status:
-        {telemetryApiStatus === "Online" ? (
-          <Chip label="Online" color="success" />
-        ) : (
-          <Chip label="Offline" color="error" />
-        )}
-      </Typography>
-
-      {error && (
-        <Alert severity="error" onClose={() => setError(null)}>
-          {error}
-        </Alert>
-      )}
-      <Box sx={{ mt: 2 }}>
-        <TelemetryTable
-          rows={rows}
-          loading={loading || deleting}
-          lastRefreshed={lastRefreshed}
-          onRefresh={handleFetchTelemetryData}
-          onAdd={() => setIsFormOpen(true)}
-          onDelete={handleDeleteTelemetry}
-        ></TelemetryTable>
-      </Box>
-      <Dialog
-        open={isFormOpen}
-        onClose={() => setIsFormOpen(false)}
-        fullWidth
-        maxWidth="sm"
+    <>
+      <Box
+        component="header"
+        sx={{
+          bgcolor: "#14283F",
+          color: "#FFFFFF",
+          px: 3,
+          py: 3,
+        }}
       >
-        <DialogContent>
-          <TelemetryForm onSubmit={handleCreateTelemetry}></TelemetryForm>
-        </DialogContent>
-      </Dialog>
-    </Container>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+          <SatelliteAltIcon sx={{ fontSize: 36 }} />
+          <Box>
+            <Typography variant="h4">Satellite Telemetry Dashboard</Typography>
+            <Typography variant="body2" sx={{ color: "#D3DFEC", mt: 0.5 }}>
+              Monitor and manage telemetry data
+            </Typography>
+          </Box>
+        </Box>
+      </Box>
+      <Box
+        sx={{
+          minHeight: "100vh",
+          bgcolor: "#F4F7FB",
+          py: 4,
+        }}
+      >
+        <Container maxWidth="xl">
+          <Typography variant="subtitle1">
+            Backend API Health Status:
+            {telemetryApiStatus === "Online" ? (
+              <Chip label="Online" color="success" />
+            ) : (
+              <Chip label="Offline" color="error" />
+            )}
+          </Typography>
+
+          {error && (
+            <Alert severity="error" onClose={() => setError(null)}>
+              {error}
+            </Alert>
+          )}
+          <Box sx={{ mt: 2 }}>
+            <TelemetryTable
+              rows={rows}
+              loading={loading || deleting}
+              lastRefreshed={lastRefreshed}
+              onRefresh={handleFetchTelemetryData}
+              onAdd={() => setIsFormOpen(true)}
+              onDelete={handleDeleteTelemetry}
+            ></TelemetryTable>
+          </Box>
+          <Dialog
+            open={isFormOpen}
+            onClose={() => setIsFormOpen(false)}
+            fullWidth
+            maxWidth="sm"
+          >
+            <DialogContent>
+              <TelemetryForm onSubmit={handleCreateTelemetry}></TelemetryForm>
+            </DialogContent>
+          </Dialog>
+        </Container>
+      </Box>
+    </>
   );
 }
 
