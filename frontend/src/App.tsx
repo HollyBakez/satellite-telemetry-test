@@ -168,7 +168,7 @@ function App() {
             maxWidth="sm"
           >
             <DialogContent>
-              <TelemetryForm onSubmit={handleCreateTelemetry}></TelemetryForm>
+              <TelemetryForm onSubmit={handleCreateTelemetry} onClose={()=> setIsFormOpen(false)}></TelemetryForm>
             </DialogContent>
           </Dialog>
         </Container>

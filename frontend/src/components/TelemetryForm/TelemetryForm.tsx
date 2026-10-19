@@ -4,6 +4,7 @@ import type { TelemetryCreate } from "../types/telemetry";
 
 interface TelemetryFormProps {
   onSubmit: (telemetry: TelemetryCreate) => Promise<void> | void;
+  onClose: () => void;
 }
 
 interface FormValues {
@@ -60,7 +61,10 @@ const createInitialValues = (): FormValues => ({
   status: "",
 });
 
-export default function TelemetryForm({ onSubmit }: TelemetryFormProps) {
+export default function TelemetryForm({
+  onSubmit,
+  onClose,
+}: TelemetryFormProps) {
   const [form, setForm] = useState<FormValues>(createInitialValues);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -185,9 +189,15 @@ export default function TelemetryForm({ onSubmit }: TelemetryFormProps) {
           </Typography>
         )}
 
-        <Button type="submit" variant="contained" disabled={isSubmitting}>
-          {isSubmitting ? "Adding..." : "Add Telemetry"}
-        </Button>
+        <Stack direction="row" spacing={2} sx={{ justifyContent: "flex-end" }}>
+          <Button variant="outlined" onClick={onClose} disabled={isSubmitting}>
+            Cancel
+          </Button>
+
+          <Button type="submit" variant="contained" disabled={isSubmitting}>
+            {isSubmitting ? "Adding..." : "Add Telemetry"}
+          </Button>
+        </Stack>
       </Stack>
     </>
     // </Paper>

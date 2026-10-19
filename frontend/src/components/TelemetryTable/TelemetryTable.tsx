@@ -223,7 +223,11 @@ const TelemetryTable = ({
         </DialogContent>
 
         <DialogActions>
-          <Button onClick={handleCancelDelete} disabled={deleting}>
+          <Button
+            variant="outlined"
+            onClick={handleCancelDelete}
+            disabled={deleting}
+          >
             Cancel
           </Button>
 
