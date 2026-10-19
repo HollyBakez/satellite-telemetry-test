@@ -67,11 +67,11 @@ uvicorn app.main:app --host 0.0.0.0 --port 8000
 
 The backend API will be available at http://localhost:8000, with interactive API documentation at http://localhost:8000/docs.
 
-
 ### How to run using Docker
+
 ```bash
 # Build the backend image
-cd backend 
+cd backend
 docker build -t telemetry-backend .
 ```
 
@@ -79,6 +79,7 @@ docker build -t telemetry-backend .
 # Start backend container
 docker run --rm -d --name telemetry-backend -p 8000:8000 telemetry-backend
 ```
+
 The backend API will be available at http://localhost:8000, with interactive API documentation at http://localhost:8000/docs.
 
 ### How to run backend tests
@@ -101,12 +102,21 @@ npm run dev
 
 Open http://localhost:5173/ in your browser.
 
+### How to run frontend tests
+
+```bash
+cd frontend
+npm install
+npm run test:run
+```
 
 ## How to test the application
+
 #### Start up the backend either using local or docker method. I will show the docker method.
+
 ```bash
 # Build the backend image
-cd backend 
+cd backend
 docker build -t telemetry-backend .
 ```
 
@@ -114,6 +124,7 @@ docker build -t telemetry-backend .
 # Start backend container
 docker run --rm -d --name telemetry-backend -p 8000:8000 telemetry-backend
 ```
+
 #### Start up the frontend.
 
 ```bash
@@ -121,6 +132,7 @@ cd frontend
 npm install
 npm run dev
 ```
+
 Open http://localhost:5173/ in your browser.
 
 Verify that Health Status: Online, it could take 30 secs - 1 min, frontend will check server health on start-up.
