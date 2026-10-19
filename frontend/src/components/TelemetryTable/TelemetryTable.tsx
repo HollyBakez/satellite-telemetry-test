@@ -9,6 +9,7 @@ import { useState } from "react";
 import {
   Box,
   Button,
+  CircularProgress,
   Dialog,
   DialogActions,
   DialogContent,
@@ -34,7 +35,7 @@ interface Props {
 }
 
 const cols: GridColDef<Telemetry>[] = [
-  { field: "satelliteId", headerName: "Satellite Id", flex: 1 },
+  { field: "satelliteId", headerName: "Satellite ID", flex: 1 },
   {
     field: "timestamp",
     headerName: "Timestamp",
@@ -120,11 +121,17 @@ const TelemetryTable = ({
         <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>
           <Button
             variant="outlined"
-            startIcon={<RefreshIcon />}
+            startIcon={
+              loading ? (
+                <CircularProgress size={18} color="inherit" />
+              ) : (
+                <RefreshIcon />
+              )
+            }
             onClick={() => void onRefresh()}
             disabled={loading || deleting}
           >
-            Refresh
+            {loading ? "Refreshing..." : "Refresh"}
           </Button>
           <Button
             variant="contained"
@@ -237,6 +244,7 @@ const TelemetryTable = ({
         loading={loading}
         checkboxSelection
         disableRowSelectionOnClick
+        disableRowSelectionExcludeModel
         rowSelectionModel={selection}
         onRowSelectionModelChange={setSelection}
         pageSizeOptions={[5, 10, 25, { value: -1, label: "All" }]}
